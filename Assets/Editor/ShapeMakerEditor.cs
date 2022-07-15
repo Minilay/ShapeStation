@@ -1,18 +1,10 @@
-﻿using System;
-using Codice.Client.Common;
-using Editor;
-using Unity.VisualScripting;
+﻿using Editor;
 using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(ShapeMaker))]
 public class ShapeMakerEditor : UnityEditor.Editor
 {
-    private enum ShapeType
-    {
-        Basic, Starred
-    }
-    [SerializeField] private ShapeType _shapeType;
     
     private ShapeMaker _shapeMaker;
     private void OnEnable()
@@ -33,10 +25,11 @@ public class ShapeMakerEditor : UnityEditor.Editor
 
     private void RenderEditor()
     {
-        _shapeType = (ShapeType) EditorGUILayout.EnumPopup("Shape type", _shapeType);
-        EditorGUILayout.Space();
         base.OnInspectorGUI();
         serializedObject.ApplyModifiedProperties();
+        
+        EditorGUILayout.HelpBox($"Tris count: {_shapeMaker.GetTrisCount()}", MessageType.None);
+
         GUIButton.Button(() =>
         {
             _shapeMaker.SaveMeshInAssets();
@@ -44,6 +37,7 @@ public class ShapeMakerEditor : UnityEditor.Editor
         
         GUIButton.Button(() =>
         {
+            _shapeMaker.GenerateCollider();
         }, "Generate Collider");
 
     }
