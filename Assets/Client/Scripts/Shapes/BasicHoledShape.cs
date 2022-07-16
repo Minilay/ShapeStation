@@ -5,7 +5,7 @@ namespace Client.Scripts.Shapes
     public class BasicHoledShape : Shape
     {
         private readonly float _thickness;
-        public BasicHoledShape(int vertexCount, float radius, float phase, float thickness) : base(vertexCount, radius, phase)
+        public BasicHoledShape(ShapeProperties shapeProperties,  float thickness) : base(shapeProperties)
         {
             _thickness = thickness;
         }

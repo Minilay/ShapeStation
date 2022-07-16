@@ -4,7 +4,7 @@ namespace Client.Scripts.Shapes
 {
     public class BasicShape : Shape
     {
-        public BasicShape(int vertexCount, float radius, float phase) : base(vertexCount, radius, phase)
+        public BasicShape(ShapeProperties shapeProperties) : base(shapeProperties)
         {
         }
         public override Mesh CreateMesh()

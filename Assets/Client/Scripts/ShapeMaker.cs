@@ -1,31 +1,30 @@
 using System;
 using Client.Scripts;
 using Client.Scripts.Shapes;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 [ExecuteAlways]
 public class ShapeMaker : MonoBehaviour
 {
-    [SerializeField] private int _vertexCount;
-    [SerializeField] private float _radius;
-    [SerializeField] private float _phase;
-    [Range(0, 1)] [SerializeField] private float _thickness;
+    [SerializeField] private ShapeProperties _shapeProperties;
+    [Range(0, 1)] [SerializeField] private float holeSize;
     [Range(0, 1)] [SerializeField] private float _spikeValue;
 
     private MeshFilter _meshFilter;
 
     private void OnValidate()
     {
-        _radius = Mathf.Max(0, _radius);
-        _vertexCount = Mathf.Max(3, _vertexCount);
+        _shapeProperties.Validation();
+        
+        _shapeProperties.vertexCount += _spikeValue == 0 ? 0 : _shapeProperties.vertexCount % 2;
+
     }
 
     private void Reset()
     {
-        _vertexCount = 3;
-        _radius = 1;
+        _shapeProperties.vertexCount = 3;
+        _shapeProperties.radius = 1;
     }
 
     private void OnEnable()
@@ -35,12 +34,14 @@ public class ShapeMaker : MonoBehaviour
 
     public void MakeShape()
     {
-        Shape shape = _thickness == 0
-            ? new BasicShape(_vertexCount, _radius, _phase)
-            : new BasicHoledShape(_vertexCount, _radius, _phase, _thickness);
+        Shape shape = holeSize == 0 ? 
+            _spikeValue == 0 ? 
+                new BasicShape(_shapeProperties):
+                new StarredShape(_shapeProperties, _spikeValue) :
+            _spikeValue == 0 ? 
+                new BasicHoledShape(_shapeProperties, holeSize) : 
+                new StarredHoledShape(_shapeProperties, holeSize, _spikeValue);
 
-        shape = _spikeValue == 0 ? shape : new StarredShape(_vertexCount, _radius, _phase, _spikeValue);
-        
         _meshFilter.mesh = shape.CreateMesh();
     }
 

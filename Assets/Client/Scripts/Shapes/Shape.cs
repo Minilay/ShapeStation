@@ -8,11 +8,11 @@ namespace Client.Scripts.Shapes
         protected readonly float _radius;
         protected readonly float _phase;
 
-        protected Shape(int vertexCount, float radius, float phase)
+        protected Shape(ShapeProperties shapeProperties)
         {
-            _vertexCount = vertexCount;
-            _radius = radius;
-            _phase = phase;
+            _vertexCount = shapeProperties.vertexCount;
+            _radius = shapeProperties.radius;
+            _phase = shapeProperties.phase;
         }
 
         public abstract Mesh CreateMesh();

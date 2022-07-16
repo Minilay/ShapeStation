@@ -5,7 +5,6 @@ using UnityEngine;
 [CustomEditor(typeof(ShapeMaker))]
 public class ShapeMakerEditor : UnityEditor.Editor
 {
-    
     private ShapeMaker _shapeMaker;
     private void OnEnable()
     {
