@@ -38,17 +38,17 @@ namespace Client.Scripts.Shapes
             }
             for (var i = 0; i < _localVertexCount; i++)
             {
-                tris[i * 3] = 2 * i;
+                tris[i * 3] = (2 * i - 1 + 2 * _localVertexCount) % (2 * _localVertexCount);
                 tris[i * 3 + 1] = 2 * i + 1;
-                tris[i * 3 + 2] = (2 * i - 1 + 2 * _localVertexCount) % (2 * _localVertexCount);
+                tris[i * 3 + 2] = 2 * i;
             }
 
             for (var i = 0; i < _localVertexCount - 2; i++)
             {
                 var offset = _localVertexCount * 3;
-                tris[offset + i * 3] = 2 * i + 1 + 4;
+                tris[offset + i * 3] = 2 * i + 1 + 2;
                 tris[offset + i * 3 + 1] = 1 + 0;
-                tris[offset + i * 3 + 2] = 2 * i + 1 + 2;
+                tris[offset + i * 3 + 2] = 2 * i + 1 + 4;
             }
             return new Mesh {vertices = verts, triangles = tris, normals = normals, uv = uv};
         }

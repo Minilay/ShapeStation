@@ -30,9 +30,9 @@ namespace Client.Scripts.Shapes
 
             for (var i = 0; i < _vertexCount - 2; i++)
             {
-                tris[i * 3] = i + 2;
+                tris[i * 3] = i + 1;
                 tris[i * 3 + 1] = 0;
-                tris[i * 3 + 2] = i + 1;
+                tris[i * 3 + 2] = i + 2;
             }
 
             return new Mesh {vertices = verts, triangles = tris, normals = normals, uv = uv};

@@ -53,26 +53,26 @@ namespace Client.Scripts.Shapes
             }
             for (var i = 0; i < _localVertexCount; i++)
             {
-                tris[i * 6] = 2 * i;
+                tris[i * 6] = 2 * i + 2 * _localVertexCount;
                 tris[i * 6 + 1] = 2 * i + 1;
-                tris[i * 6 + 2] = 2 * i + 2 * _localVertexCount;
+                tris[i * 6 + 2] = 2 * i;
                 
-                tris[i * 6 + 3] = 2 * i;
+                tris[i * 6 + 3] = (2 * i - 1 + 2 * _localVertexCount) % (2 * _localVertexCount);
                 tris[i * 6 + 4] = 2 * i + 2 * _localVertexCount;
-                tris[i * 6 + 5] = (2 * i - 1 + 2 * _localVertexCount) % (2 * _localVertexCount);
+                tris[i * 6 + 5] = 2 * i;
             }
             
             for (var i = 0; i < _localVertexCount; i++)
             {
                 var offset = _localVertexCount * 6;
                 
-                tris[offset + i * 6] = 2 * i + 1;
+                tris[offset + i * 6] = 2 * i + 1 + 2 * _localVertexCount - 1;
                 tris[offset + i * 6 + 1] = 2 * i + 1 + 2 * _localVertexCount;
-                tris[offset + i * 6 + 2] = 2 * i + 1 + 2 * _localVertexCount - 1;
+                tris[offset + i * 6 + 2] = 2 * i + 1;
                 
-                tris[offset + i * 6 + 3] = (2 * i - 1 + 2 * _localVertexCount) % (2 * _localVertexCount);
+                tris[offset + i * 6 + 3] = (2 * i - 1 + 2 * _localVertexCount) % (2 * _localVertexCount) + 2 * _localVertexCount;
                 tris[offset + i * 6 + 4] = 2 * i + 2 * _localVertexCount;
-                tris[offset + i * 6 + 5] = (2 * i - 1 + 2 * _localVertexCount) % (2 * _localVertexCount) + 2 * _localVertexCount;
+                tris[offset + i * 6 + 5] = (2 * i - 1 + 2 * _localVertexCount) % (2 * _localVertexCount);
             }
             return new Mesh {vertices = verts, triangles = tris, normals = normals, uv = uv};
         }
