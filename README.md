@@ -7,4 +7,4 @@ This plugin was made for developers to create a simple shapes without leaving <b
 
 <img src="./readmeAssets/logo.png">
 
-View details and download package from <a href="https://minilay.itch.io/shapestation">itch.io</a>
+View details and download package from <a href="https://minilay.itch.io/shapestation">🎮 itch.io</a>
